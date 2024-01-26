@@ -16,7 +16,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "TB_RESERVAS": "tbes_reservas_dev",
-        "ORIGINS": "http://localhost:4200;https://www.dev.aescoladesoftware.com.br"
+        "ORIGINS": "http://localhost:4200",
       }
     },
     "https": {
@@ -26,7 +26,7 @@
       "applicationUrl": "https://localhost:7264;http://localhost:5153",
       "environmentVariables": {
         "TB_RESERVAS": "tbes_reservas_dev",
-        "ORIGINS": "http://localhost:4200;https://www.dev.aescoladesoftware.com.br",
+        "ORIGINS": "http://localhost:4200",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
@@ -34,7 +34,8 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ORIGINS": "http://localhost:4200"
       }
     }
   }
