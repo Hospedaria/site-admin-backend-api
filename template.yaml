@@ -42,27 +42,17 @@ Resources:
           Properties:
             Path: "/reservas/{id}"
             Method: GET
-        ConsultaReservaOptions:
-          Type: HttpApi
-          Properties:
-            Path: "/reservas/{id}"
-            Method: OPTIONS
         EditarReserva:
           Type: HttpApi
           Properties:
             Path: "/reservas/{id}"
             Method: PUT
-        EditarReservaOptions:
-          Type: HttpApi
-          Properties:
-            Path: "/reservas/{id}"
-            Method: OPTIONS
         DeletarReserva:
           Type: HttpApi
           Properties:
             Path: "/reservas/{id}"
             Method: DELETE
-        DeletarReservaOptions:
+        ReservaIdOptions:
           Type: HttpApi
           Properties:
             Path: "/reservas/{id}"
