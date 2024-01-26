@@ -1,0 +1,7 @@
+{
+    "Parameters": {
+        "Environment": "prod",
+        "TbReservas": "tbes_reservas",
+        "Origins": ""
+     }
+}

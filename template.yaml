@@ -1,0 +1,103 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: Hospedaria - Reservas - API
+Parameters:
+  Environment:
+    Description: Environment
+    Type: String
+  TbReservas:
+    Description: Nome da tabela de reservas
+    Type: String
+  Origins:
+    Description: Origins
+    Type: String
+  
+Resources:  
+  ReservasLambdaApiFn:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: API para reservas
+      FunctionName: !Join ["_", [!Ref Environment, "hospedaria-reservas-lambdaapifn"]]
+      Handler: hospedaria.reservas.Api
+      CodeUri: src/publish
+      Runtime: dotnet6
+      Timeout: 30
+      MemorySize: 128
+      Policies:
+        - AWSLambda_FullAccess
+        - AmazonDynamoDBFullAccess
+      Events:
+        CadastrarReserva:
+          Type: HttpApi
+          Properties:
+            Path: "/reservas"
+            Method: POST
+        CadastrarReservaOptions:
+          Type: HttpApi
+          Properties:
+            Path: "/reservas"
+            Method: OPTIONS
+        ConsultaReserva:
+          Type: HttpApi
+          Properties:
+            Path: "/reservas/{id}"
+            Method: GET
+        ConsultaReservaOptions:
+          Type: HttpApi
+          Properties:
+            Path: "/reservas/{id}"
+            Method: OPTIONS
+        EditarReserva:
+          Type: HttpApi
+          Properties:
+            Path: "/reservas/{id}"
+            Method: PUT
+        EditarReservaOptions:
+          Type: HttpApi
+          Properties:
+            Path: "/reservas/{id}"
+            Method: OPTIONS
+        DeletarReserva:
+          Type: HttpApi
+          Properties:
+            Path: "/reservas/{id}"
+            Method: DELETE
+        DeletarReservaOptions:
+          Type: HttpApi
+          Properties:
+            Path: "/reservas/{id}"
+            Method: OPTIONS
+        ConsultaReservasPorData:
+          Type: HttpApi
+          Properties:
+            Path: "/reservas/consultaPorData/{data}"
+            Method: GET
+        ConsultaReservasPorDataOptions:
+          Type: HttpApi
+          Properties:
+            Path: "/reservas/consultaPorData/{data}"
+            Method: OPTIONS
+      Environment:
+        Variables:
+          TB_RESERVAS: !Ref TbReservas
+          ORIGINS: !Ref Origins
+    Tags: 
+      - Key: Ambiente
+        Value: !Ref Environment
+      - Key: Microservico
+        Value: Reservas
+      - Key: Servico
+        Value: Lambda
+
+  ReservasLambdaApiLogGroup: 
+    Type: AWS::Logs::LogGroup
+    Properties: 
+      LogGroupName: !Join ["", ["/aws/lambda/", !Ref Environment, "_hospedaria-reservas-lambdaapifn"]]
+      RetentionInDays: 3
+      Tags: 
+        - Key: Ambiente
+          Value: !Ref Environment
+        - Key: Microservico
+          Value: Reservas
+        - Key: Servico
+          Value: LogGroup

@@ -1,0 +1,19 @@
+name: Pipeline de development
+
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+
+  Deploy-dotnet-api-lambda:
+    uses: PePires58/ReusableWorkflows/.github/workflows/006_dotnet_deploy_pipeline.yaml@main
+    with: 
+      stack-name: "dev-hospedaria-reservas-lambdaapi-fn"
+      parameters-file-path: "infra/dev.parameters.json"
+      
+    secrets:
+      AWS_BUCKET_DEPLOY: ${{ secrets.AWS_BUCKET_DEPLOY }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

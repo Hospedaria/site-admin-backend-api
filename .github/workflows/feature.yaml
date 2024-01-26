@@ -1,0 +1,12 @@
+name: Pipeline de feature
+
+on:
+  push:
+    branches:
+      - "feature**"
+
+jobs:
+  Build-test-dotnet:
+    uses: PePires58/ReusableWorkflows/.github/workflows/006_dotnet_build.yaml@main
+    with:
+      
