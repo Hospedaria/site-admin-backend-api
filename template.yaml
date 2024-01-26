@@ -18,7 +18,7 @@ Resources:
     Properties:
       Description: API para reservas
       FunctionName: !Join ["_", [!Ref Environment, "hospedaria-reservas-lambdaapifn"]]
-      Handler: hospedaria.reservas.Api
+      Handler: Hospedaria.Reservas.Api
       CodeUri: src/publish
       Runtime: dotnet6
       Timeout: 30
