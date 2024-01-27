@@ -4,18 +4,19 @@ using System.Text.Json.Serialization;
 
 namespace Hospedaria.Reservas.Api.Entities
 {
+    [DynamoDBTable("tbes_reservas_dev")]
     public record Reserva
     {
         public Reserva()
         {
             Email = Telefone = ChegaraAs = Observacoes = Nome = string.Empty;
             Suites = new();
-            Id = Guid.NewGuid();
+            Id = Guid.NewGuid().ToString();
         }
 
         [DynamoDBHashKey("id")]
         [JsonPropertyName("id")]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         [DynamoDBProperty("nome")]
         [JsonPropertyName("nome")]

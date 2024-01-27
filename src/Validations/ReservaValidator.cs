@@ -10,7 +10,8 @@ namespace Hospedaria.Reservas.Api.Validations
         public ReservaValidator()
         {
             RuleFor(c => c.Id)
-                .NotEmpty().WithMessage("Id da reserva é obrigatório");
+                .NotEmpty().WithMessage("Id da reserva é obrigatório")
+                .NotEqual(Guid.Empty.ToString()).WithMessage("Id da reserva é obrigatório");
 
             RuleFor(c => c.Email)
                 .NotNull().WithMessage("Email não pode ser nulo")

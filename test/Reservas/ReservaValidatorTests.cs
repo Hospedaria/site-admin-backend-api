@@ -19,7 +19,7 @@ namespace Hospedaria.Reservas.Api.Tests.Reservas
 
         [TestMethod]
         public void DeveEstourarErroIdVazio(){
-            ReservaNok.Id = Guid.Empty;
+            ReservaNok.Id = Guid.Empty.ToString();
             
             Validator.TestValidate(ReservaNok)
                 .ShouldHaveValidationErrorFor(c => c.Id)
