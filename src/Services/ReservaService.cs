@@ -33,7 +33,7 @@ namespace Hospedaria.Reservas.Api.Services
         {
             return await DbContext.QueryAsync<Reserva>(dataReserva, new DynamoDBOperationConfig()
             {
-                IndexName = "",
+                IndexName = "ix_data",
                 OverrideTableName = Reserva.GetNomeTabela()
             }).GetRemainingAsync();
         }
