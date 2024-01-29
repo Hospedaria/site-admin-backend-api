@@ -32,6 +32,7 @@ namespace Hospedaria.Reservas.Api.Entities
 
         [DynamoDBProperty("checkin")]
         [JsonPropertyName("checkin")]
+        [DynamoDBGlobalSecondaryIndexHashKey("ix_checkin", AttributeName = "checkin")]
         public DateTime? CheckIn { get; set; }
         
         [DynamoDBProperty("checkout")]

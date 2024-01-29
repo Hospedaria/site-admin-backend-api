@@ -33,11 +33,11 @@ namespace Hospedaria.Reservas.Api.Services
         {
             return await DbContext.QueryAsync<Reserva>(dataReserva.ToString("yyyy-MM-dd"), new DynamoDBOperationConfig()
             {
-                IndexName = "ix_data",
+                IndexName = "ix_checkin",
                 OverrideTableName = Reserva.GetNomeTabela(),
                 QueryFilter = new()
                 {
-                    new("data", Amazon.DynamoDBv2.DocumentModel.ScanOperator.Equal, dataReserva.ToString("yyyy-MM-dd"))
+                    new("checkin", Amazon.DynamoDBv2.DocumentModel.ScanOperator.Equal, dataReserva.ToString("yyyy-MM-dd"))
                 }
             }).GetRemainingAsync();
         }
