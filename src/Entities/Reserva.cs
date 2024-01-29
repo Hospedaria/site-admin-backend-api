@@ -1,4 +1,5 @@
 ﻿using Amazon.DynamoDBv2.DataModel;
+using Hospedaria.Reservas.Api.Converters;
 using Hospedaria.Reservas.Api.Enums;
 using System.Text.Json.Serialization;
 
@@ -30,12 +31,12 @@ namespace Hospedaria.Reservas.Api.Entities
         [JsonPropertyName("email")]
         public string Email { get; set; }
 
-        [DynamoDBProperty("checkin")]
+        [DynamoDBProperty("checkin", Converter = typeof(DataToStringConverter))]
         [JsonPropertyName("checkin")]
         [DynamoDBGlobalSecondaryIndexHashKey("ix_checkin", AttributeName = "checkin")]
         public DateTime? CheckIn { get; set; }
         
-        [DynamoDBProperty("checkout")]
+        [DynamoDBProperty("checkout", Converter = typeof(DataToStringConverter))]
         [JsonPropertyName("checkout")]
         public DateTime? CheckOut { get; set; }
 
