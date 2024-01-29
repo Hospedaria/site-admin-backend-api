@@ -31,7 +31,7 @@ namespace Hospedaria.Reservas.Api.Services
 
         public async Task<List<Reserva>> ConsultarReservas(DateTime dataReserva)
         {
-            return await DbContext.QueryAsync<Reserva>(dataReserva, new DynamoDBOperationConfig()
+            return await DbContext.QueryAsync<Reserva>(dataReserva.ToString("yyyy-MM-dd"), new DynamoDBOperationConfig()
             {
                 IndexName = "ix_data",
                 OverrideTableName = Reserva.GetNomeTabela()
