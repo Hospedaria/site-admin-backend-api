@@ -31,13 +31,13 @@ namespace Hospedaria.Reservas.Api.Services
 
         public async Task<List<Reserva>> ConsultarReservas(DateTime dataReserva)
         {
-            return await DbContext.QueryAsync<Reserva>(dataReserva.ToString("yyyy-MM-dd"), new DynamoDBOperationConfig()
+            return await DbContext.QueryAsync<Reserva>(dataReserva, new DynamoDBOperationConfig()
             {
                 IndexName = "ix_checkin",
                 OverrideTableName = Reserva.GetNomeTabela(),
                 QueryFilter = new()
                 {
-                    new("checkin", Amazon.DynamoDBv2.DocumentModel.ScanOperator.Equal, dataReserva.ToString("yyyy-MM-dd"))
+                    new("checkin", Amazon.DynamoDBv2.DocumentModel.ScanOperator.Equal, dataReserva)
                 }
             }).GetRemainingAsync();
         }
