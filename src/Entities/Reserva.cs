@@ -33,7 +33,7 @@ namespace Hospedaria.Reservas.Api.Entities
 
         [DynamoDBProperty("checkin", Converter = typeof(DataToStringConverter))]
         [JsonPropertyName("checkin")]
-        [DynamoDBGlobalSecondaryIndexHashKey("ix_checkin", AttributeName = "checkin")]
+        [DynamoDBGlobalSecondaryIndexHashKey("ix_checkin", AttributeName = "checkin", Converter = typeof(DataToStringConverter))]
         public DateTime? CheckIn { get; set; }
         
         [DynamoDBProperty("checkout", Converter = typeof(DataToStringConverter))]
