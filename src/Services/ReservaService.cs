@@ -21,7 +21,7 @@ namespace Hospedaria.Reservas.Api.Services
             });
         }
 
-        public async Task<Reserva> ConsultarReserva(Guid id)
+        public async Task<Reserva> ConsultarReserva(string id)
         {
             return await DbContext.LoadAsync<Reserva>(id, new DynamoDBOperationConfig()
             {
@@ -38,7 +38,7 @@ namespace Hospedaria.Reservas.Api.Services
             }).GetRemainingAsync();
         }
 
-        public async Task DeletarReserva(Guid id)
+        public async Task DeletarReserva(string id)
         {
             await DbContext.DeleteAsync<Reserva>(id, new DynamoDBOperationConfig()
             {

@@ -9,7 +9,7 @@ namespace Hospedaria.Reservas.Api.Handlers
             if (Guid.Empty == id)
                 return Results.BadRequest("Id inválido");
 
-            await reservaService.DeletarReserva(id);
+            await reservaService.DeletarReserva(id.ToString());
 
             return Results.NoContent();
         }
