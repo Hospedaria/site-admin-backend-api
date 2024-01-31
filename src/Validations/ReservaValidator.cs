@@ -14,8 +14,6 @@ namespace Hospedaria.Reservas.Api.Validations
                 .NotEqual(Guid.Empty.ToString()).WithMessage("Id da reserva é obrigatório");
 
             RuleFor(c => c.Email)
-                .NotNull().WithMessage("Email não pode ser nulo")
-                .NotEmpty().WithMessage("Email não pode ser vazio")
                 .MaximumLength(200).WithMessage("Email deve ter no máximo 200 caracteres");
             When(c => !string.IsNullOrEmpty(c.Email), () => {
                 RuleFor(c => c.Email)

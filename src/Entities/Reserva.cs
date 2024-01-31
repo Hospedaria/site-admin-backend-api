@@ -29,7 +29,7 @@ namespace Hospedaria.Reservas.Api.Entities
         
         [DynamoDBProperty("email")]
         [JsonPropertyName("email")]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         [DynamoDBProperty("checkin", Converter = typeof(DataToStringConverter))]
         [JsonPropertyName("checkin")]
