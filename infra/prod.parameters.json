@@ -2,6 +2,6 @@
     "Parameters": {
         "Environment": "prod",
         "TbReservas": "tbes_reservas",
-        "Origins": ""
+        "Origins": "https://d353k0jwnf9mia.cloudfront.net"
      }
 }
