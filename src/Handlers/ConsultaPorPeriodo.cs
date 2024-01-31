@@ -17,7 +17,7 @@ namespace Hospedaria.Reservas.Api.Handlers
             var reservas = await reservaService.ConsultarReservasPorPeriodo(dataInicio, dataTermino);
 
             if (reservas.Any())
-                return Results.Ok(reservas);
+                return Results.Ok(reservas.OrderBy(c => c.CheckIn));
 
             return Results.NoContent();
         }

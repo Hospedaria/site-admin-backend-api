@@ -8,7 +8,7 @@ namespace Hospedaria.Reservas.Api.Handlers
         {
             var reservas = await reservaService.ConsultarReservasAPartirDeHoje();
             if (reservas.Any())
-                return Results.Ok(reservas);
+                return Results.Ok(reservas.OrderBy(c => c.CheckIn));
             else
                 return Results.NoContent();
         }
