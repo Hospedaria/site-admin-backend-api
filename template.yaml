@@ -37,6 +37,16 @@ Resources:
           Properties:
             Path: "/reservas"
             Method: OPTIONS
+        ConsultaReservasAPartirHoje:
+          Type: HttpApi
+          Properties:
+            Path: "/reservas/apartirdehoje"
+            Method: GET
+        ConsultaReservasAPartirHojeOptions:
+          Type: HttpApi
+          Properties:
+            Path: "/reservas/apartirdehoje"
+            Method: OPTIONS
         ConsultaReserva:
           Type: HttpApi
           Properties:

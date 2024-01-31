@@ -1,5 +1,6 @@
 ﻿using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
+using Amazon.DynamoDBv2.DocumentModel;
 using Hospedaria.Reservas.Api.Entities;
 using Hospedaria.Reservas.Api.Interfaces;
 
@@ -27,6 +28,19 @@ namespace Hospedaria.Reservas.Api.Services
             {
                 OverrideTableName = Reserva.GetNomeTabela()
             });
+        }
+
+        public async Task<List<Reserva>> ConsultarReservasAPartirDeHoje()
+        {
+            DateTime dataReferencia = DateTime.UtcNow.AddHours(-3);
+
+            return await DbContext.ScanAsync<Reserva>(new List<ScanCondition>()
+            {
+                new("checkin", ScanOperator.GreaterThan, dataReferencia)
+            }, new DynamoDBOperationConfig()
+            {
+                OverrideTableName = Reserva.GetNomeTabela()
+            }).GetRemainingAsync();
         }
 
         public async Task<List<Reserva>> ConsultarReservas(DateTime dataReserva)

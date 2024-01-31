@@ -8,5 +8,6 @@ namespace Hospedaria.Reservas.Api.Interfaces
         Task<Reserva> ConsultarReserva(string id);
         Task<List<Reserva>> ConsultarReservas(DateTime dataReserva);
         Task DeletarReserva(string id);
+        Task<List<Reserva>> ConsultarReservasAPartirDeHoje();
     }
 }

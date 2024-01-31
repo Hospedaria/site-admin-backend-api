@@ -22,6 +22,11 @@ app.MapPost("/reservas", async ([FromBody] Reserva reserva,
     return await CadastraReservaHandler.CadastrarReserva(reserva, reservaService, validator);
 });
 
+app.MapGet("/reservas/apartirdehoje", async (IReservaService reservaService) =>
+{
+    return await ConsultaReservasAPartirDeHoje.Consultar(reservaService);
+});
+
 app.MapGet("/reservas/{id:guid}", async(Guid id,
     IReservaService reservaService) =>
 {
