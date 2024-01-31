@@ -67,15 +67,15 @@ Resources:
           Properties:
             Path: "/reservas/{id}"
             Method: OPTIONS
-        ConsultaReservasPorData:
+        ConsultaPorPeriodo:
           Type: HttpApi
           Properties:
-            Path: "/reservas/consultaPorData/{data}"
+            Path: "/reservas/consultaPorPeriodo"
             Method: GET
-        ConsultaReservasPorDataOptions:
+        ConsultaPorPeriodoOptions:
           Type: HttpApi
           Properties:
-            Path: "/reservas/consultaPorData/{data}"
+            Path: "/reservas/consultaPorData"
             Method: OPTIONS
       Environment:
         Variables:

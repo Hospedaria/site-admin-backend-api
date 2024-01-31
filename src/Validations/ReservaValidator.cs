@@ -38,7 +38,7 @@ namespace Hospedaria.Reservas.Api.Validations
 
             RuleFor(c => c.CheckIn)
                 .NotNull().WithMessage("Check-in não pode ser nulo")
-                .LessThan(c => c.CheckOut).WithMessage("Check-in deve ser menor do que o check-out");
+                .LessThan(c => c.CheckOut).WithMessage("Check-out deve ser maior do que o Check-in");
 
             RuleFor(c => c.CheckOut)
                 .NotNull().WithMessage("Check-out não pode ser nulo");

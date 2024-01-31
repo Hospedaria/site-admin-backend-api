@@ -46,10 +46,11 @@ app.MapDelete("/reservas/{id:guid}", async (Guid id,
     return await DeletarReservaHandler.DeletarReserva(id, reservaService);
 });
 
-app.MapGet("/reservas/consultaPorData/{data:datetime}", async (DateTime data,
+app.MapGet("/reservas/consultaPorPeriodo", async ([FromQuery(Name = "datainicio")]DateTime dataInicio,
+    [FromQuery(Name = "datatermino")] DateTime dataTermino,
     IReservaService reservaService) =>
 {
-    return await ConsultaPorDataHandler.Consultar(data, reservaService);
+    return await ConsultaPorPeriodo.Consultar(dataInicio, dataTermino, reservaService);
 });
 
 app.UseCors("HospedagemReservasPolicy");

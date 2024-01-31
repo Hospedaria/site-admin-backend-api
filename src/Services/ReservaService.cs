@@ -43,13 +43,24 @@ namespace Hospedaria.Reservas.Api.Services
             }).GetRemainingAsync();
         }
 
-        public async Task<List<Reserva>> ConsultarReservas(DateTime dataReserva)
+        public async Task<List<Reserva>> ConsultarReservasPorPeriodo(DateTime dataInicio, DateTime dataTermino)
         {
-            return await DbContext.QueryAsync<Reserva>(dataReserva, new DynamoDBOperationConfig()
+            List<Reserva> reservas = new();
+
+            DateTime dataRef = dataInicio;
+
+            while (dataRef <= dataTermino)
             {
-                IndexName = "ix_checkin",
-                OverrideTableName = Reserva.GetNomeTabela()
-            }).GetRemainingAsync();
+                reservas.AddRange(await DbContext.QueryAsync<Reserva>(dataRef, new DynamoDBOperationConfig()
+                {
+                    IndexName = "ix_checkin",
+                    OverrideTableName = Reserva.GetNomeTabela()
+                }).GetRemainingAsync());
+
+                dataRef = dataRef.AddDays(1);
+            }
+
+            return reservas;
         }
 
         public async Task DeletarReserva(string id)
