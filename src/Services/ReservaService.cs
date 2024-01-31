@@ -36,7 +36,7 @@ namespace Hospedaria.Reservas.Api.Services
 
             return await DbContext.ScanAsync<Reserva>(new List<ScanCondition>()
             {
-                new("checkin", ScanOperator.GreaterThan, dataReferencia)
+                new("checkin", ScanOperator.GreaterThanOrEqual, dataReferencia)
             }, new DynamoDBOperationConfig()
             {
                 OverrideTableName = Reserva.GetNomeTabela()
