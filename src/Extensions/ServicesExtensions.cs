@@ -20,7 +20,7 @@ namespace Hospedaria.Reservas.Api.Extensions
         private static IServiceCollection RegistrarServicosAWS(IServiceCollection services)
         {
             return services
-                .AddSingleton<IAmazonDynamoDB>(new AmazonDynamoDBClient("AKIA6ODU5G4RFWGJSDU6", "SZNg3P0ZWHtYYejRzujanHMRQDw5WnSemfIBrPID"));
+                .AddSingleton<IAmazonDynamoDB, AmazonDynamoDBClient>();
         }
 
         public static IServiceCollection ConfigurarCors(this IServiceCollection services)
