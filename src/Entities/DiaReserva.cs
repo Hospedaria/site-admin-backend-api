@@ -23,7 +23,7 @@ namespace Hospedaria.Reservas.Api.Entities
 
         public static string GetNomeTabela()
         {
-            string? nomeTabela = Environment.GetEnvironmentVariable("TB_DIAS_RESERVA");
+            string? nomeTabela = Environment.GetEnvironmentVariable("TB_DIAS_RESERVAS");
             nomeTabela ??= string.Empty;
 
             return nomeTabela;

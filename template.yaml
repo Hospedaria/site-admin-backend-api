@@ -5,6 +5,9 @@ Parameters:
   Environment:
     Description: Environment
     Type: String
+  TbDiasReservas:
+    Description: Nome da tabela de dias de reserva
+    Type: String
   TbReservas:
     Description: Nome da tabela de reservas
     Type: String
@@ -80,6 +83,7 @@ Resources:
       Environment:
         Variables:
           TB_RESERVAS: !Ref TbReservas
+          TB_DIAS_RESERVAS: !Ref TbDiasReservas
           ORIGINS: !Ref Origins
     Tags: 
       - Key: Ambiente

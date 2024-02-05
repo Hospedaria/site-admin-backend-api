@@ -2,6 +2,7 @@
     "Parameters": {
         "Environment": "prod",
         "TbReservas": "tbes_reservas",
+        "TbDiasReservas": "tbes_dias_reservas",
         "Origins": "https://d353k0jwnf9mia.cloudfront.net"
      }
 }
