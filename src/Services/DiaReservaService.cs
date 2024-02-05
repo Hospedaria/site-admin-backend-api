@@ -1,4 +1,5 @@
-﻿using Amazon.DynamoDBv2.DataModel;
+﻿using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.DataModel;
 using Amazon.DynamoDBv2.DocumentModel;
 using Hospedaria.Reservas.Api.Entities;
 using Hospedaria.Reservas.Api.Interfaces;
@@ -8,9 +9,9 @@ namespace Hospedaria.Reservas.Api.Services
 {
     public class DiaReservaService : IDiaReservaService
     {
-        public DiaReservaService(IDynamoDBContext context)
+        public DiaReservaService(IAmazonDynamoDB dynamoDB)
         {
-            Context = context;
+            Context = new DynamoDBContext(dynamoDB);
         }
 
         IDynamoDBContext Context { get; }
