@@ -7,6 +7,8 @@ namespace Hospedaria.Reservas.Api.Entities
     [DynamoDBTable("tbes_dias_reservas_dev")]
     public record DiaReserva
     {
+        public DiaReserva() :this(string.Empty, DateTime.Now) { }
+
         public DiaReserva(string id, DateTime dataReferencia)
         {
             IdReserva = id;
