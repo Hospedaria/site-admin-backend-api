@@ -3,7 +3,6 @@ using Hospedaria.Reservas.Api.Entities;
 using Hospedaria.Reservas.Api.Extensions;
 using Hospedaria.Reservas.Api.Handlers;
 using Hospedaria.Reservas.Api.Interfaces;
-using Hospedaria.Reservas.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,14 +16,15 @@ var app = builder.Build();
 
 app.MapPost("/reservas", async ([FromBody] Reserva reserva,
     IReservaService reservaService,
+    IDiaReservaService diaReservaService,
     IValidator<Reserva> validator) =>
 {
-    return await CadastraReservaHandler.CadastrarReserva(reserva, reservaService, validator);
+    return await CadastraReservaHandler.CadastrarReserva(reserva, reservaService, diaReservaService, validator);
 });
 
-app.MapGet("/reservas/apartirdehoje", async (IReservaService reservaService) =>
+app.MapGet("/reservas/apartirdehoje", async (IReservaService reservaService, IDiaReservaService diaReservaService) =>
 {
-    return await ConsultaReservasAPartirDeHoje.Consultar(reservaService);
+    return await ConsultaReservasAPartirDeHoje.Consultar(reservaService, diaReservaService);
 });
 
 app.MapGet("/reservas/{id:guid}", async(Guid id,
@@ -35,22 +35,25 @@ app.MapGet("/reservas/{id:guid}", async(Guid id,
 
 app.MapPut("/reservas/{id:guid}", async (Guid id,
     [FromBody] Reserva reserva,
-    IReservaService reservaService) =>
+    IReservaService reservaService,
+    IDiaReservaService diaReservaService) =>
 {
-    return await AtualizarReservaHandler.AtualizarReserva(id, reserva, reservaService);
+    return await AtualizarReservaHandler.AtualizarReserva(id, reserva, reservaService, diaReservaService);
 });
 
 app.MapDelete("/reservas/{id:guid}", async (Guid id,
-    IReservaService reservaService) =>
+    IReservaService reservaService,
+    IDiaReservaService diaReservaService) =>
 {
-    return await DeletarReservaHandler.DeletarReserva(id, reservaService);
+    return await DeletarReservaHandler.DeletarReserva(id, reservaService, diaReservaService);
 });
 
 app.MapGet("/reservas/consultaPorPeriodo", async ([FromQuery(Name = "datainicio")]DateTime dataInicio,
     [FromQuery(Name = "datatermino")] DateTime dataTermino,
-    IReservaService reservaService) =>
+    IReservaService reservaService,
+    IDiaReservaService diaReservaService) =>
 {
-    return await ConsultaPorPeriodo.Consultar(dataInicio, dataTermino, reservaService);
+    return await ConsultaPorPeriodo.Consultar(dataInicio, dataTermino, reservaService, diaReservaService);
 });
 
 app.UseCors("HospedagemReservasPolicy");

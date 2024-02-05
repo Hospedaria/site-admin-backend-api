@@ -8,6 +8,7 @@ namespace Hospedaria.Reservas.Api.Handlers
     {
         public static async Task<IResult> CadastrarReserva(Reserva reserva,
             IReservaService cadastraReservaService,
+            IDiaReservaService diaReservaService,
             IValidator<Reserva> validador)
         {
             var resultadoValidacao = await validador.ValidateAsync(reserva);
@@ -15,6 +16,7 @@ namespace Hospedaria.Reservas.Api.Handlers
                 return Results.ValidationProblem(resultadoValidacao.ToDictionary());
 
             await cadastraReservaService.SalvarReserva(reserva);
+            await diaReservaService.CadastrarDias(reserva);
 
             return Results.Ok();
         }
