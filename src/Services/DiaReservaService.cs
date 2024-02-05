@@ -4,6 +4,7 @@ using Amazon.DynamoDBv2.DocumentModel;
 using Hospedaria.Reservas.Api.Entities;
 using Hospedaria.Reservas.Api.Interfaces;
 using Microsoft.VisualBasic;
+using System.Security.Cryptography.Xml;
 
 namespace Hospedaria.Reservas.Api.Services
 {
@@ -44,36 +45,35 @@ namespace Hospedaria.Reservas.Api.Services
         {
             DateTime dataReferencia = DateTime.UtcNow.AddHours(-3);
 
-            return await Context.QueryAsync<DiaReserva>("data",
-                QueryOperator.GreaterThanOrEqual,
-                new List<object>() { dataReferencia},
-                new()
-                {
-                    OverrideTableName = DiaReserva.GetNomeTabela()
-                })
-            .GetRemainingAsync();
+            return await Context.ScanAsync<DiaReserva>(new List<ScanCondition>()
+            {
+                new(nameof(DiaReserva.Data), ScanOperator.GreaterThanOrEqual, dataReferencia)
+            }, new DynamoDBOperationConfig()
+            {
+                OverrideTableName = DiaReserva.GetNomeTabela()
+            }).GetRemainingAsync();
         }
 
         public async Task<List<DiaReserva>> ConsultaReservasPorPeriodo(DateTime dataInicio, DateTime dataFinal)
         {
-            return await Context.QueryAsync<DiaReserva>("data",
-                QueryOperator.Between,
-                new List<object>() { dataInicio, dataFinal },
-                new()
-                {
-                    OverrideTableName = DiaReserva.GetNomeTabela()
-                }).GetRemainingAsync();
+            return await Context.ScanAsync<DiaReserva>(new List<ScanCondition>()
+            {
+                new(nameof(DiaReserva.Data), ScanOperator.Between, dataInicio, dataFinal)
+            }, new DynamoDBOperationConfig()
+            {
+                OverrideTableName = DiaReserva.GetNomeTabela()
+            }).GetRemainingAsync();
         }
 
         public async Task Deletar(Reserva reserva)
         {
-            DateTime dataInicio = Convert.ToDateTime(reserva.CheckIn);
-            DateTime dataTermino = Convert.ToDateTime(reserva.CheckOut);
+            var diasReserva = await Context.QueryAsync<DiaReserva>(reserva.Id, new DynamoDBOperationConfig()
+            {
+                OverrideTableName = DiaReserva.GetNomeTabela(),
+                IndexName = "ix_reserva"
+            }).GetRemainingAsync();
 
-
-            var dias = await ConsultaReservasPorPeriodo(dataInicio, dataTermino);
-
-            dias.ForEach(async (dia) => await Context.DeleteAsync(dia, new DynamoDBOperationConfig()
+            diasReserva.ForEach(async (dia) => await Context.DeleteAsync(dia, new DynamoDBOperationConfig()
             {
                 OverrideTableName = DiaReserva.GetNomeTabela()
             }));

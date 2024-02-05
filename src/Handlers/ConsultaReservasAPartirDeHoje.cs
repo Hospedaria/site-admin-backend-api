@@ -8,13 +8,22 @@ namespace Hospedaria.Reservas.Api.Handlers
         public static async Task<IResult> Consultar(IReservaService reservaService, 
             IDiaReservaService diaReservaService)
         {
-            var dias = await diaReservaService.ConsultaReservasAPartirDeHoje();
+            try
+            {
 
-            var reservas = await reservaService.ConsultarEmLote(dias.BuscarReservas());
-            if (reservas.Any())
-                return Results.Ok(reservas.OrderBy(c => c.CheckIn));
-            else
-                return Results.NoContent();
+                var dias = await diaReservaService.ConsultaReservasAPartirDeHoje();
+
+                var reservas = await reservaService.ConsultarEmLote(dias.BuscarReservas());
+                if (reservas.Any())
+                    return Results.Ok(reservas.OrderBy(c => c.CheckIn));
+                else
+                    return Results.NoContent();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }

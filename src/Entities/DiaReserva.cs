@@ -21,6 +21,7 @@ namespace Hospedaria.Reservas.Api.Entities
 
         [DynamoDBRangeKey("id")]
         [JsonPropertyName("idReserva")]
+        [DynamoDBGlobalSecondaryIndexHashKey("ix_reserva", AttributeName = "id")]
         public string IdReserva { get; set; }
 
         public static string GetNomeTabela()
