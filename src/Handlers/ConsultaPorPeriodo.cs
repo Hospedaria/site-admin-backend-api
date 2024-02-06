@@ -1,4 +1,6 @@
-﻿using Hospedaria.Reservas.Api.Extensions;
+﻿using Hospedaria.Reservas.Api.Builders;
+using Hospedaria.Reservas.Api.Entities;
+using Hospedaria.Reservas.Api.Extensions;
 using Hospedaria.Reservas.Api.Interfaces;
 
 namespace Hospedaria.Reservas.Api.Handlers
@@ -20,8 +22,13 @@ namespace Hospedaria.Reservas.Api.Handlers
 
             var reservas = await reservaService.ConsultarEmLote(diasReserva.BuscarReservas());
 
-            if (reservas.Any())
-                return Results.Ok(reservas.OrderBy(c => c.CheckIn));
+
+            List<ReservaGridSite> reservasSite = new ReservaGridSiteBuilder()
+                .BuildList(diasReserva, reservas)
+                .Items;
+
+            if (reservasSite.Any())
+                return Results.Ok(reservasSite.OrderBy(c => c.Data));
 
             return Results.NoContent();
         }
