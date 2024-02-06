@@ -13,16 +13,18 @@ namespace Hospedaria.Reservas.Api.Builders
 
         public ReservaGridSiteBuilder BuildList(List<DiaReserva> dias, List<Reserva> reservas)
         {
-            dias.ForEach((dia) =>
+            var datas = dias.Select(c => c.Data).DistinctBy(c => c.Date).ToList();
+
+            datas.ForEach((data) =>
             {
-                var idsReservas = dias.Where(c => c.Data == dia.Data)
+                var idsReservas = dias.Where(c => c.Data == data)
                     .Select(c => c.IdReserva);
 
                 List<Reserva> reservasParaInserir = new();
                 foreach (var item in idsReservas)
                     reservasParaInserir.Add(reservas.First(c => c.Id == item));
                 
-                Items.Add(new(dia.Data, reservasParaInserir));
+                Items.Add(new(data, reservasParaInserir));
             });
 
             return this;
