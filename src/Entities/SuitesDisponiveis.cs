@@ -9,6 +9,7 @@
             new(3,"Azul"),
             new(4,"Verde"),
             new(5,"Chalé"),
+            new(6,"Rosa")
         };
     }
 }

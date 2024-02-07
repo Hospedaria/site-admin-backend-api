@@ -13,6 +13,7 @@ namespace Hospedaria.Reservas.Api.Extensions
         {
             return RegistrarServicosAWS(services)
                 .AddSingleton<IReservaService, ReservaService>()
+                .AddSingleton<IDiaReservaService, DiaReservaService>()
                 .AddScoped<IValidator<Reserva>, ReservaValidator>();
         }
 
@@ -20,6 +21,7 @@ namespace Hospedaria.Reservas.Api.Extensions
         {
             return services
                 .AddSingleton<IAmazonDynamoDB, AmazonDynamoDBClient>();
+
         }
 
         public static IServiceCollection ConfigurarCors(this IServiceCollection services)

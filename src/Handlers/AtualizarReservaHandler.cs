@@ -7,7 +7,8 @@ namespace Hospedaria.Reservas.Api.Handlers
     {
         public static async Task<IResult> AtualizarReserva(Guid id,
             Reserva reserva,
-            IReservaService reservaService)
+            IReservaService reservaService,
+            IDiaReservaService diaReservaService)
         {
             if (Guid.Empty == id)
                 return Results.BadRequest("Id inválido");
@@ -18,6 +19,7 @@ namespace Hospedaria.Reservas.Api.Handlers
                 return Results.BadRequest("Reserva não encontrada");
 
             await reservaService.SalvarReserva(reserva);
+            await diaReservaService.Atualizar(reserva);
 
             return Results.Ok();
         }

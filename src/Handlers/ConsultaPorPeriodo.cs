@@ -1,4 +1,7 @@
-﻿using Hospedaria.Reservas.Api.Interfaces;
+﻿using Hospedaria.Reservas.Api.Builders;
+using Hospedaria.Reservas.Api.Entities;
+using Hospedaria.Reservas.Api.Extensions;
+using Hospedaria.Reservas.Api.Interfaces;
 
 namespace Hospedaria.Reservas.Api.Handlers
 {
@@ -6,18 +9,26 @@ namespace Hospedaria.Reservas.Api.Handlers
     {
         public static async Task<IResult> Consultar(DateTime dataInicio,
             DateTime dataTermino,
-            IReservaService reservaService)
+            IReservaService reservaService, 
+            IDiaReservaService diaReservaService)
         {
             if (dataTermino < dataInicio)
                 return Results.ValidationProblem(new Dictionary<string, string[]>()
                 {
                     {"DataTermino", new[]{ "Data de término deve ser maior do que a data de início" } }
                 });
-            
-            var reservas = await reservaService.ConsultarReservasPorPeriodo(dataInicio, dataTermino);
 
-            if (reservas.Any())
-                return Results.Ok(reservas.OrderBy(c => c.CheckIn));
+            var diasReserva = await diaReservaService.ConsultaReservasPorPeriodo(dataInicio, dataTermino);
+
+            var reservas = await reservaService.ConsultarEmLote(diasReserva.BuscarReservas());
+
+
+            List<ReservaGridSite> reservasSite = new ReservaGridSiteBuilder()
+                .BuildList(diasReserva, reservas)
+                .Items;
+
+            if (reservasSite.Any())
+                return Results.Ok(reservasSite.OrderBy(c => c.Data));
 
             return Results.NoContent();
         }
