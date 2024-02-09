@@ -25,7 +25,7 @@ namespace Hospedaria.Reservas.Api.Services
             DateTime dataReferencia = dataInicial;
             List<DiaReserva> diasReserva = new();
 
-            while (dataReferencia <= dataFinal)
+            while (dataReferencia < dataFinal)
             {
                 diasReserva.Add(new(reserva.Id, dataReferencia));
                 dataReferencia = dataReferencia.AddDays(1);
