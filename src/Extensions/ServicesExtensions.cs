@@ -14,7 +14,9 @@ namespace Hospedaria.Reservas.Api.Extensions
             return RegistrarServicosAWS(services)
                 .AddSingleton<IReservaService, ReservaService>()
                 .AddSingleton<IDiaReservaService, DiaReservaService>()
-                .AddScoped<IValidator<Reserva>, ReservaValidator>();
+                .AddSingleton<IPagamentoService, PagamentosService>()
+                .AddScoped<IValidator<Reserva>, ReservaValidator>()
+                .AddScoped<IValidator<Pagamento>, PagamentoValidator>();
         }
 
         private static IServiceCollection RegistrarServicosAWS(IServiceCollection services)

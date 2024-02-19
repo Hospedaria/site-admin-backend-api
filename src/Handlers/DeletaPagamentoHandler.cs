@@ -8,7 +8,7 @@ namespace Hospedaria.Reservas.Api.Handlers
         {
             await pagamentoService.DeletaPagamento(id.ToString(), idPagamento.ToString());
 
-            return Results.Ok()
+            return Results.Ok();
         }
     }
 }
