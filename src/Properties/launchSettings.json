@@ -16,7 +16,9 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "TB_RESERVAS": "tbes_reservas_dev",
-        "ORIGINS": "http://localhost:4200",
+        "TB_PAGAMENTOS": "tbes_pagamentos_dev",
+        "TB_DIAS_RESERVAS": "tbes_dias_reservas_dev",
+        "ORIGINS": "http://localhost:4200"
       }
     },
     "https": {
@@ -26,6 +28,8 @@
       "applicationUrl": "https://localhost:7264;http://localhost:5153",
       "environmentVariables": {
         "TB_RESERVAS": "tbes_reservas_dev",
+        "TB_PAGAMENTOS": "tbes_pagamentos_dev",
+        "TB_DIAS_RESERVAS": "tbes_dias_reservas_dev",
         "ORIGINS": "http://localhost:4200",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

@@ -18,7 +18,7 @@ namespace Hospedaria.Reservas.Api.Entities
         public string IdReserva { get; set; }
         
         [JsonPropertyName("idPagamento")]
-        [DynamoDBRangeKey("id_reserva")]
+        [DynamoDBRangeKey("id_pagamento")]
         public string IdPagamento { get; set; }
 
         [DynamoDBProperty("data", Converter = typeof(DataToStringConverter))]

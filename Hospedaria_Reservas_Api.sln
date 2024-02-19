@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospedaria.Reservas.Api", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospedaria.Reservas.Api.Tests", "test\Hospedaria.Reservas.Api.Tests.csproj", "{CAE4FD87-B9FC-4DD8-9B58-D93293253C7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AjusteReserva", "AjusteReserva\AjusteReserva.csproj", "{0C746916-4E37-4AE3-8764-195D43439C7D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{CAE4FD87-B9FC-4DD8-9B58-D93293253C7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAE4FD87-B9FC-4DD8-9B58-D93293253C7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAE4FD87-B9FC-4DD8-9B58-D93293253C7A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0C746916-4E37-4AE3-8764-195D43439C7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0C746916-4E37-4AE3-8764-195D43439C7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0C746916-4E37-4AE3-8764-195D43439C7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0C746916-4E37-4AE3-8764-195D43439C7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
