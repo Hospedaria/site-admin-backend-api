@@ -11,6 +11,9 @@ Parameters:
   TbReservas:
     Description: Nome da tabela de reservas
     Type: String
+  TbPagamentos:
+    Description: Nome da tabela de pagamentos
+    Type: String
   Origins:
     Description: Origins
     Type: String
@@ -104,6 +107,7 @@ Resources:
         Variables:
           TB_RESERVAS: !Ref TbReservas
           TB_DIAS_RESERVAS: !Ref TbDiasReservas
+          TB_PAGAMENTOS: !Ref TbPagamentos
           ORIGINS: !Ref Origins
     Tags: 
       - Key: Ambiente
