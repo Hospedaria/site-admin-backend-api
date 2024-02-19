@@ -16,9 +16,10 @@ var app = builder.Build();
 
 app.MapGet("/exportar/reservas", async ([FromQuery] DateTime dataReferencia,
     IDiaReservaService diaReservaService,
-    IReservaService reservaService) =>
+    IReservaService reservaService,
+    IPagamentoService pagamentoService) =>
 {
-    return await ExportarReservas.Exportar(dataReferencia, diaReservaService, reservaService);
+    return await ExportarReservas.Exportar(dataReferencia, diaReservaService, reservaService,pagamentoService);
 });
 
 app.MapPost("/reservas", async ([FromBody] Reserva reserva,
