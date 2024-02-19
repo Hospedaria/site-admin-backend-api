@@ -6,7 +6,8 @@ namespace Hospedaria.Reservas.Api.Handlers
     {
         public static async Task<IResult> DeletarReserva(Guid id,
             IReservaService reservaService,
-            IDiaReservaService diaReservaService)
+            IDiaReservaService diaReservaService,
+            IPagamentoService pagamentos)
         {
             if (Guid.Empty == id)
                 return Results.BadRequest("Id inválido");
@@ -15,6 +16,7 @@ namespace Hospedaria.Reservas.Api.Handlers
 
             await reservaService.DeletarReserva(id.ToString());
             await diaReservaService.Deletar(reserva);
+            await pagamentos.DeletaPagamentosDaReserva(id.ToString());
 
             return Results.NoContent();
         }

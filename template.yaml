@@ -80,6 +80,26 @@ Resources:
           Properties:
             Path: "/reservas/consultaPorData"
             Method: OPTIONS
+        CadastraPagamento:
+          Type: HttpApi
+          Properties:
+            Path: "/reservas/{id}/pagamentos"
+            Method: POST
+        CadastraPagamentoOptions:
+          Type: HttpApi
+          Properties:
+            Path: "/reservas/{id}/pagamentos"
+            Method: OPTIONS
+        DeletaPagamento:
+          Type: HttpApi
+          Properties:
+            Path: "/reservas/{id}/pagamentos/{idPagamento}"
+            Method: DELETE
+        DeletaPagamentoOptions:
+          Type: HttpApi
+          Properties:
+            Path: "/reservas/{id}/pagamentos/{idPagamento}"
+            Method: OPTIONS
       Environment:
         Variables:
           TB_RESERVAS: !Ref TbReservas

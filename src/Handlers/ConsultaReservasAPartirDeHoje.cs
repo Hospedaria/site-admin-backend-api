@@ -8,10 +8,16 @@ namespace Hospedaria.Reservas.Api.Handlers
     public static class ConsultaReservasAPartirDeHoje
     {
         public static async Task<IResult> Consultar(IReservaService reservaService,
-            IDiaReservaService diaReservaService)
+            IDiaReservaService diaReservaService,
+            IPagamentoService pagamentoService)
         {
             var dias = await diaReservaService.ConsultaReservasAPartirDeHoje();
             var reservas = await reservaService.ConsultarEmLote(dias.BuscarReservas());
+
+            foreach (var reserva in reservas)
+            {
+                reserva.Pagamentos = await pagamentoService.BuscaPagamentosDaReserva(reserva.Id);
+            }
 
             List<ReservaGridSite> reservasSite = new ReservaGridSiteBuilder()
                 .BuildList(dias, reservas)
