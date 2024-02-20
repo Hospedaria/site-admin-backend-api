@@ -1,4 +1,5 @@
 ﻿using Hospedaria.Reservas.Api.Entities;
+using System.Globalization;
 using System.Text;
 
 namespace Hospedaria.Reservas.Api.Builders
@@ -14,12 +15,12 @@ namespace Hospedaria.Reservas.Api.Builders
 
         public MensagemExportacaoReservasBuilder Build(List<Reserva> reservas, DateTime dataReferencia)
         {
-            Mensagem.AppendLine($"{dataReferencia:ddd, d MMM}");
+            Mensagem.AppendLine($"{dataReferencia.ToString("ddd, d MMM", new CultureInfo("pt-BR"))}");
             Mensagem.AppendLine();
 
             foreach (var reserva in reservas)
             {
-                Mensagem.AppendLine($"{reserva.Nome}");
+                Mensagem.AppendLine($"*{reserva.Nome}*");
 
                 Mensagem.AppendLine("Suites:");
                 foreach (var suite in reserva.Suites)
@@ -29,10 +30,10 @@ namespace Hospedaria.Reservas.Api.Builders
                 {
                     Mensagem.AppendLine("Depósitos:");
                     foreach (var pagamento in reserva.Pagamentos)
-                        Mensagem.AppendLine($"R$ {pagamento.Valor} - {pagamento.DataPagamento:dd/MM/yyyy}");
+                        Mensagem.AppendLine($"R$ {pagamento.Valor.ToString("0.##")} - {pagamento.DataPagamento:dd/MM/yyyy}");
                 }
 
-                Mensagem.AppendLine($"Valor a pagar:{reserva.ValorAPagar}");
+                Mensagem.AppendLine($"Valor a pagar: R$ {reserva.ValorAPagar.ToString("0.##")}");
                 Mensagem.AppendLine();
             }
 
