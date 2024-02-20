@@ -103,6 +103,16 @@ Resources:
           Properties:
             Path: "/reservas/{id}/pagamentos/{idPagamento}"
             Method: OPTIONS
+        ExportarReservas:
+          Type: HttpApi
+          Properties:
+            Path: "/exportar/reservas"
+            Method: GET
+        ExportarReservasOptions:
+          Type: HttpApi
+          Properties:
+            Path: "/exportar/reservas"
+            Method: OPTIONS
       Environment:
         Variables:
           TB_RESERVAS: !Ref TbReservas
