@@ -24,7 +24,7 @@ namespace Hospedaria.Reservas.Api.Builders
 
                 Mensagem.AppendLine("Suites:");
                 foreach (var suite in reserva.Suites)
-                    Mensagem.AppendLine($"- {SuitesDisponiveis.DeParaMensagemExportacao.GetValueOrDefault(suite)}");
+                    Mensagem.AppendLine($"- {SuitesDisponiveis.DeParaMensagemExportacao.GetValueOrDefault(suite)} ({SuitesDisponiveis.Suites.First(c => c.Id == suite).Cor})");
 
                 if (reserva.Pagamentos.Any())
                 {
