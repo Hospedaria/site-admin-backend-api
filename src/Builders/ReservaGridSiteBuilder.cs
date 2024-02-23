@@ -23,8 +23,11 @@ namespace Hospedaria.Reservas.Api.Builders
                 List<Reserva> reservasParaInserir = new();
                 foreach (var item in idsReservas)
                     reservasParaInserir.Add(reservas.First(c => c.Id == item));
-                
-                Items.Add(new(data, reservasParaInserir));
+
+                string urlWhats = new MensagemExportacaoReservasBuilder().Build(reservasParaInserir, data)
+                    .Mensagem.ToString();
+
+                Items.Add(new(data, reservasParaInserir, urlWhats));
             });
 
             return this;
