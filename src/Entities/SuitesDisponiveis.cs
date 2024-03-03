@@ -11,5 +11,15 @@
             new(5,"Chalé"),
             new(6,"Rosa")
         };
+
+        public static readonly Dictionary<int, string> DeParaMensagemExportacao = new()
+        {
+            { 1,"Master" },
+            { 2, "Tradicional" },
+            { 3, "Tradicional" },
+            { 4, "Tradicional" },
+            { 5, "Chalé" },
+            { 6, "Tradicional" }
+        };
     }
 }

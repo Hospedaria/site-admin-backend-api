@@ -69,6 +69,13 @@ namespace Hospedaria.Reservas.Api.Entities
         [JsonPropertyName("suites")]
         public List<int> Suites { get; set; }
 
+        [DynamoDBIgnore]
+        [JsonPropertyName("pagamentos")]
+        public List<Pagamento> Pagamentos { get; set; }
+
+        [DynamoDBIgnore]
+        public double ValorAPagar => Valor - Pagamentos.Sum(c => c.Valor);
+
         public static string? GetNomeTabela() => Environment.GetEnvironmentVariable("TB_RESERVAS");
     }
 }

@@ -4,10 +4,11 @@ namespace Hospedaria.Reservas.Api.Entities
 {
     public record ReservaGridSite
     {
-        public ReservaGridSite(DateTime data, List<Reserva> reservas)
+        public ReservaGridSite(DateTime data, List<Reserva> reservas, string urlExportar)
         {
             Data = data;
             Reservas = reservas;
+            UrlExportarWhats = urlExportar;
         }
 
         [JsonPropertyName("data")]
@@ -15,5 +16,8 @@ namespace Hospedaria.Reservas.Api.Entities
 
         [JsonPropertyName("reservas")]
         public List<Reserva> Reservas { get; set; }
+
+        [JsonPropertyName("urlExportar")]
+        public string UrlExportarWhats { get; set; }
     }
 }

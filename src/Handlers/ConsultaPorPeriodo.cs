@@ -10,7 +10,8 @@ namespace Hospedaria.Reservas.Api.Handlers
         public static async Task<IResult> Consultar(DateTime dataInicio,
             DateTime dataTermino,
             IReservaService reservaService, 
-            IDiaReservaService diaReservaService)
+            IDiaReservaService diaReservaService,
+            IPagamentoService pagamentoService)
         {
             if (dataTermino < dataInicio)
                 return Results.ValidationProblem(new Dictionary<string, string[]>()
@@ -22,6 +23,10 @@ namespace Hospedaria.Reservas.Api.Handlers
 
             var reservas = await reservaService.ConsultarEmLote(diasReserva.BuscarReservas());
 
+            foreach (var reserva in reservas)
+            {
+                reserva.Pagamentos = await pagamentoService.BuscaPagamentosDaReserva(reserva.Id);
+            }
 
             List<ReservaGridSite> reservasSite = new ReservaGridSiteBuilder()
                 .BuildList(diasReserva, reservas)

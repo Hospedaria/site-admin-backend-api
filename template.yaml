@@ -11,6 +11,9 @@ Parameters:
   TbReservas:
     Description: Nome da tabela de reservas
     Type: String
+  TbPagamentos:
+    Description: Nome da tabela de pagamentos
+    Type: String
   Origins:
     Description: Origins
     Type: String
@@ -80,10 +83,41 @@ Resources:
           Properties:
             Path: "/reservas/consultaPorData"
             Method: OPTIONS
+        CadastraPagamento:
+          Type: HttpApi
+          Properties:
+            Path: "/reservas/{id}/pagamentos"
+            Method: POST
+        CadastraPagamentoOptions:
+          Type: HttpApi
+          Properties:
+            Path: "/reservas/{id}/pagamentos"
+            Method: OPTIONS
+        DeletaPagamento:
+          Type: HttpApi
+          Properties:
+            Path: "/reservas/{id}/pagamentos/{idPagamento}"
+            Method: DELETE
+        DeletaPagamentoOptions:
+          Type: HttpApi
+          Properties:
+            Path: "/reservas/{id}/pagamentos/{idPagamento}"
+            Method: OPTIONS
+        ExportarReservas:
+          Type: HttpApi
+          Properties:
+            Path: "/exportar/reservas"
+            Method: GET
+        ExportarReservasOptions:
+          Type: HttpApi
+          Properties:
+            Path: "/exportar/reservas"
+            Method: OPTIONS
       Environment:
         Variables:
           TB_RESERVAS: !Ref TbReservas
           TB_DIAS_RESERVAS: !Ref TbDiasReservas
+          TB_PAGAMENTOS: !Ref TbPagamentos
           ORIGINS: !Ref Origins
     Tags: 
       - Key: Ambiente
